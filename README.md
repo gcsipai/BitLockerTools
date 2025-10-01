@@ -1,37 +1,72 @@
-Program neve: BitLockerTools (v7.1 - Citk 2025)
+🔐 BitLockerTools (Citk 2025)
+BitLockerTools egy grafikus segédprogram (GUI), amely a Windows natív manage-bde.exe eszközét használja a BitLocker titkosítási műveletek (állapotlekérdezés, kulcsexportálás, felfüggesztés, kikapcsolás) egyszerűsítésére. A program CustomTkinter segítségével modern megjelenésű és felhasználóbarát felületet biztosít.
 
-Leírás:
+✨ Fő Funkciók
+Állapot Lekérdezése: Gyorsan ellenőrzi a megadott meghajtó BitLocker állapotát (titkosítási státusz, verzió, védelem állapota).
 
-A BitLockerTools egy grafikus felhasználói felülettel (GUI) rendelkező segédprogram, amelyet a Microsoft BitLocker meghajtótitkosítási funkciójának egyszerűsített kezelésére terveztek Windows 10 és Windows 11 operációs rendszereken.
+Helyreállítási Kulcs Exportálása: Kimentheti a BitLocker helyreállítási jelszavakat egy megadott TXT fájlba (normál felhasználói joggal).
 
-A program a Windows beépített manage-bde parancssori eszközét használja egy felhasználóbarát felületen keresztül, lehetővé téve a felhasználók számára a leggyakoribb BitLocker műveletek gyors elvégzését a meghajtókon.
+Felfüggesztés/Folytatás: Lehetővé teszi a BitLocker ideiglenes felfüggesztését a rendszergazdai műveletekhez (pl. BIOS frissítés). (Rendszergazdai jog szükséges!)
 
-Fő Funkciók (Képességek)
-A program két fő műveletcsoportra osztja a funkciókat:
+Kikapcsolás (Dekódolás): Véglegesen kikapcsolja a BitLocker titkosítást. (Rendszergazdai jog szükséges!)
 
-1. Általános Műveletek (Normál jogosultság is elegendő)
-Állapot Lekérdezése 🔍: Megjeleníti egy kiválasztott meghajtó aktuális BitLocker állapotát (pl. titkosított, felfüggesztett, dekódolt).
+Aszinkron Futtatás: A parancsokat külön szálon futtatja, elkerülve a grafikus felület lefagyását.
 
-Kulcs Exportálása 💾: Kinyeri és elmenti a Recovery Password (helyreállítási jelszó) típusú kulcsokat egy szöveges (.txt) fájlba. Ez kritikus fontosságú a meghajtó visszaállításához hardverhiba esetén.
+💻 Rendszerkövetelmények
+Operációs rendszer: Windows 10/11
 
-2. Adminisztrációs Műveletek (Rendszergazdai jog szükséges)
-Felfüggesztés ⏸️: Ideiglenesen kikapcsolja a BitLocker védelmet (pl. firmware frissítésekhez, diagnosztikához). Újraindítás után automatikusan folytatódik.
+Windows kiadás: Csak a BitLockert támogató kiadásokon működik (általában Pro, Enterprise, Education). A Home kiadás nem támogatott, mivel nem tartalmazza a manage-bde.exe eszközt.
 
-Folytatás ▶️: Visszakapcsolja a felfüggesztett BitLocker védelmet.
+Python: Python 3.x
 
-KIKAPCSOLÁS (Dekódolás) ⛔: Véglegesen eltávolítja a BitLocker titkosítást a meghajtóról. Ez egy hosszadalmas és visszafordíthatatlan művelet.
+🚀 Telepítés és Futtatás
+1. Függőségek (Requirements)
+A programhoz a CustomTkinter nevű Python könyvtár szükséges.
 
-Fontos Kompatibilitási és Használati Feltételek
-Windows Kiadás Követelménye: A program csak a BitLockert támogató Windows kiadásokkal működik:
+Bash
 
-Windows 10/11 Professional (Pro)
+pip install customtkinter
+2. A Program Indítása
+A program futtatása a szükséges műveletektől függően eltérő jogosultságot igényel.
 
-Windows 10/11 Enterprise
+A) Normál Futtatás (Csak Állapot/Kulcs Export)
+Az egyszerű állapotlekérdezéshez és a kulcsexportáláshoz általában elegendő a normál futtatás:
 
-Windows 10/11 Education
+Bash
 
-Nem kompatibilis a Windows Home kiadással.
+python BitLockerTools-9.0.py
+B) Rendszergazdai Futtatás (Felfüggesztés/Kikapcsolás)
+A Felfüggesztés, Folytatás és Kikapcsolás műveletekhez RENDSZERGAZDAI JOGOSULTSÁG (Admin Jog) szükséges.
 
-Rendszergazdai Jogosultság: A "Adminisztrációs Műveletek" csoportban lévő funkciók (Felfüggesztés, Folytatás, Kikapcsolás) használatához a programot RENDSZERGAZDAKÉNT kell indítani (Jobb gomb -> Futtatás rendszergazdaként).
+Keresse meg a Parancssort (CMD) vagy a PowerShellt a Windows keresőjében.
 
-Hibakezelés: A program beépített hibaellenőrzéssel rendelkezik, és hiba esetén pontos információt nyújt a felhasználónak a probléma okáról (pl. érvénytelen meghajtóbetű, manage-bde eszköz hiánya, vagy jogosultság hiánya).
+Kattintson jobb egérgombbal, és válassza a "Futtatás rendszergazdaként" opciót.
+
+Navigáljon a szkript helyére, majd futtassa a parancsot:
+
+Bash
+
+# Példa
+cd C:\Path\To\Script
+python BitLockerTools-9.0.py
+⚠️ Fontos Megjegyzés a Jogosultságokról
+Ha a programot normál joggal indítja, a rendszergazdai funkciók gombjai inaktívak maradnak, és a program figyelmeztet.
+
+A legtöbb manage-bde parancsnál a Windows rendszergazdai jogot vár el. Ha normál joggal indítva próbál meg lekérni egy állapotot, valószínűleg "access denied" hibát kap.
+
+Mindig indítsa a programot RENDSZERGAZDAKÉNT, ha a Titkosítási műveletekkel (Pause/Resume/Disable) dolgozik!
+
+🖼️ Grafikus Felület (GUI)
+A program CustomTkinter segítségével készült, ami modern, témafüggő megjelenést biztosít a Tkinter felületeknek. A kimeneti naplóban az eredmények és a hibák színekkel vannak megkülönböztetve.
+
+Zöld: Sikeres művelet
+
+Piros: Hiba/Veszélyes művelet
+
+Sárga: Figyelmeztetés (pl. Admin jog hiánya)
+
+Kék: Információ
+
+Elérhetőség: https://github.com/gcsipai/BitLockerTools/
+
+Készítette: Citk (2025)
